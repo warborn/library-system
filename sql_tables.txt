@@ -1,0 +1,66 @@
+CREATE TABLE book (
+	id INT(11) NOT NULL AUTO_INCREMENT,
+	name VARCHAR(255) NOT NULL,
+	price DECIMAL NOT NULL,
+	publisher VARCHAR(255) NOT NULL,
+	edition INT(2) NOT NULL,
+	language VARCHAR(30) NOT NULL,
+	ISBN VARCHAR(255) NOT NULL,
+	PRIMARY KEY(id)
+);
+
+
+CREATE TABLE author (
+	id INT(11) NOT NULL AUTO_INCREMENT,
+	name VARCHAR(255) NOT NULL,
+	first_name VARCHAR(255) NOT NULL,
+	last_name VARCHAR(255) NOT NULL,
+	age int(3) NOT NULL, 	
+	PRIMARY KEY(id)
+);
+
+
+CREATE TABLE authorBook (
+	author_id INT(11) NOT NULL,
+	book_id INT(11) NOT NULL
+);
+
+CREATE TABLE admin (
+	id INT(11) NOT NULL AUTO_INCREMENT,
+	name VARCHAR(255) NOT NULL,
+	username VARCHAR(255) NOT NULL,
+	password VARCHAR(255) NOT NULL,
+	PRIMARY KEY(id)
+);
+
+
+INSERT INTO author (name, first_name, last_name, age) 
+VALUES ('jose', 'perez', 'juarez', 45);
+
+INSERT INTO author (name, first_name, last_name, age) 
+VALUES ('pablo', 'garcia', 'cruz', 27);
+
+INSERT INTO author (name, first_name, last_name, age) 
+VALUES ('maria', 'gonzales', 'osorio', 38);
+
+
+
+INSERT INTO book (name, price, publisher, edition, language, ISBN) 
+VALUES ('el arbol magico', 240, 'porrua', 1, 'español', '434-2312');
+
+INSERT INTO book (name, price, publisher, edition, language, ISBN) 
+VALUES ('bajo la misma estrella', 400, 'porrua', 2, 'español', '333-1112');
+
+
+INSERT INTO authorBook(author_id, book_id) VALUES (1, 1);
+
+INSERT INTO authorBook(author_id, book_id) VALUES (2, 2);
+
+INSERT INTO authorBook(author_id, book_id) VALUES (3, 1);
+
+//Joining books and authors
+
+SELECT author.name, book.name FROM author  
+	JOIN authorBook ON authorBook.author_id = author.id 
+	JOIN book ON authorBook.book_id = book.id;
+;
